@@ -2,6 +2,8 @@
 include("header.php");
 include("database.php");
 include("vd_data_fetch.php");
+
+$search='';
 ?>
 
 <!DOCTYPE html>
@@ -10,6 +12,7 @@ include("vd_data_fetch.php");
 <head>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 <style>
 * {box-sizing: border-box;}
 
@@ -93,15 +96,20 @@ body {
   <div class="topnav">
   <a class="active" href="add_v.php">Add Vendor</a>
   <div class="search-container">
-    <form action="search.php" method="post">
-      <input type="text" placeholder="Search.." name="search">
+    <form action="" method="POST">
+      <input type="text" placeholder="Search.." name="search" onsubmit="handleChange(this.value)">
       <button type="submit"><i class="fa fa-search"></i></button>
     </form>
+    <?php
+   if(isset($_POST["search"])){
+       $search=strtoupper($_POST["search"]);
+   }
+?>
   </div>
 </div>
 <p> </p>
  <div class="row">
-   <div class="col-sm-12">
+   <div class="col-sm-14">
     <?php echo $deleteMsg??''; ?>
     <div class="table-responsive">
       <table class="table table-bordered">
@@ -120,9 +128,11 @@ body {
       if(is_array($fetchData)){
       $sn=1;
       foreach($fetchData as $data){
+        if($search=='' or strpos($data['vendor_name']??'', $search) !== false){
     ?>
       <tr>
       <td><?php echo $sn; ?></td>
+
       <td><?php echo $data['vendor_name']??''; ?></td>
       <td><?php echo $data['contact_person_name']??''; ?></td>
       <td><?php echo $data['contact_no_1']??''; ?></td>
@@ -131,11 +141,12 @@ body {
       <td><?php echo $data['area']??''; ?></td>
       <td><?php echo $data['full_address']??''; ?></td>
       <td><?php echo $data['gst_no']??''; ?></td>
+
      </tr>
      <?php
-      $sn++;}}else{ ?>
+      $sn++;}}}else{ ?>
       <tr>
-        <td colspan="12">
+        <td colspan="14">
     <?php echo $fetchData; ?>
   </td>
     <tr>
@@ -148,4 +159,9 @@ body {
 </div>
 </div>
 </body>
+<script>
+    if ( window.history.replaceState ) {
+        window.history.replaceState( null, null, window.location.href );
+    }
+</script>
 </html>

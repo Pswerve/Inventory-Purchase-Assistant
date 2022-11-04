@@ -17,7 +17,7 @@
 	<div class="header-limiter">
 		<h1><a><span>Suhaus Designers  |</span>|  Syscom Seatings</a></h1>
 		<nav>
-			<a href="home.php" class="selected">Home</a>
+			<a href="index.html" class="selected">Home</a>
 			<a href="main_menu.php">Main Menu</a>
 		</nav>
 	</div>

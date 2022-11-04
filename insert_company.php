@@ -1,8 +1,8 @@
 <?php
-    $servername='localhost';
-    $username='root';
-    $password='';
-    $dbname = "purchase_panel";
+    $servername='sql110.epizy.com';
+    $username='epiz_32897073';
+    $password='JJ6c7V4tE3hzBU';
+    $dbname = "epiz_32897073_purchase_panel";
     $conn=mysqli_connect($servername,$username,$password,"$dbname");
       if(!$conn){
           die('Could not Connect MySql Server:' .mysql_error());

@@ -1,6 +1,8 @@
 <?php
 include("header.php");
 include("database.php");
+
+$vendorName='';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -30,7 +32,7 @@ include("database.php");
               <div class="form-group">
                 <label>Vendor Name:</label>
                 <select name="vendor_name">
-                  <option value="">Select</option>
+                  <option value="" disabled selected>Select</option>
                   <?php
                             $query ="SELECT id, vendor_name FROM vendor_details";
                             $result = $conn->query($query);
@@ -39,7 +41,8 @@ include("database.php");
                   =$optionData['vendor_name']; $id =$optionData['vendor_name'];
                   ?>
                   <option value="<?php echo $id; ?>">
-                    <?php echo $option; ?>
+                    <?php echo $option;
+                    $vendorName=$option ?>
                   </option>
                   <?php
                               }}

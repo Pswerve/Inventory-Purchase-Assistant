@@ -2,6 +2,9 @@
 include("header.php");
 include("database.php");
 include("rmd_data_fetch.php");
+
+$search='';
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -92,10 +95,15 @@ include("rmd_data_fetch.php");
   <div class="topnav">
   <a class="active" href="add_rm.php">Add RM</a>
   <div class="search-container">
-    <form action="/action_page.php">
+    <form action="" method="POST">
       <input type="text" placeholder="Search.." name="search">
       <button type="submit"><i class="fa fa-search"></i></button>
     </form>
+    <?php
+   if(isset($_POST["search"])){
+       $search=strtoupper($_POST["search"]);
+   }
+?>
   </div>
 </div>
 <p> </p>
@@ -115,6 +123,7 @@ include("rmd_data_fetch.php");
       if(is_array($fetchData)){
       $sn=1;
       foreach($fetchData as $data){
+        if($search=='' or strpos($data['vendor_name']??'', $search) !== false or strpos($data['rm_name']??'', $search) !== false or strpos($data['category_name']??'', $search) !== false or strpos($data['vendor_rm_name']??'', $search) !== false){
     ?>
       <tr>
       <td><?php echo $sn; ?></td>
@@ -124,7 +133,7 @@ include("rmd_data_fetch.php");
       <td><?php echo $data['vendor_rm_name']??''; ?></td>
      </tr>
      <?php
-      $sn++;}}else{ ?>
+      $sn++;}}}else{ ?>
       <tr>
         <td colspan="8">
     <?php echo $fetchData; ?>
@@ -139,4 +148,9 @@ include("rmd_data_fetch.php");
 </div>
 </div>
 </body>
+<script>
+    if ( window.history.replaceState ) {
+        window.history.replaceState( null, null, window.location.href );
+    }
+</script>
 </html>
