@@ -4,7 +4,8 @@
     $password='JJ6c7V4tE3hzBU';
     $dbname = "epiz_32897073_purchase_panel";
     $conn=mysqli_connect($servername,$username,$password,"$dbname");
-      if(!$conn){
+
+if(!$conn){
           die('Could not Connect MySql Server:' .mysql_error());
         }
 if(isset($_POST['submit']))

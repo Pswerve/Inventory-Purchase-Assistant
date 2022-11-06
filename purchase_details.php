@@ -2,6 +2,9 @@
 include("header.php");
 include("database.php");
 include("pd_data_fetch.php");
+
+$search='';
+
 ?>
 
 <!DOCTYPE html>
@@ -95,10 +98,15 @@ body {
   <div class="topnav">
   <a class="active" href="add_pd.php">Add Record</a>
   <div class="search-container">
-    <form action="/action_page.php">
+    <form action="" method="POST">
       <input type="text" placeholder="Search.." name="search">
       <button type="submit"><i class="fa fa-search"></i></button>
     </form>
+    <?php
+   if(isset($_POST["search"])){
+       $search=strtoupper($_POST["search"]);
+   }
+?>
   </div>
 </div>
 <p> </p>
@@ -124,6 +132,7 @@ body {
       if(is_array($fetchData)){
       $sn=1;
       foreach($fetchData as $data){
+        if($search=='' or strpos($data['vendor_name']??'', $search) !== false or strpos($data['area']??'', $search) !== false or strpos($data['company_name']??'', $search) !== false or strpos($data['rm_name']??'', $search) !== false or strpos($data['category_name']??'', $search) !== false or strpos($data['vendor_rm_name']??'', $search) !== false){
     ?>
       <tr>
       <td><?php echo $sn; ?></td>
@@ -139,7 +148,7 @@ body {
       <td><?php echo $data['purchased_on']??''; ?></td>
      </tr>
      <?php
-      $sn++;}}else{ ?>
+      $sn++;}}}else{ ?>
       <tr>
         <td colspan="12">
     <?php echo $fetchData; ?>
@@ -154,4 +163,9 @@ body {
 </div>
 </div>
 </body>
+<script>
+    if ( window.history.replaceState ) {
+        window.history.replaceState( null, null, window.location.href );
+    }
+</script>
 </html>
